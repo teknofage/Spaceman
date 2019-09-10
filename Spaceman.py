@@ -1,4 +1,5 @@
 import random
+from pygame import mixer #found on https://stackoverflow.com/questions/20021457/playing-mp3-song-on-python
 
 def load_word():
     '''
@@ -51,7 +52,7 @@ def get_guessed_word(secret_word, letters_guessed):
         if letters in letters_guessed:
             guessed_word += letters #loop through letters in secret_word and add correct guesses to guessed_word
         else: 
-            guessed_word += "_ "
+            guessed_word += "_"
     return guessed_word
 
 
@@ -88,27 +89,33 @@ def spaceman(secret_word):
       After 7 wrong guesses, you lose the game. If you guess all of the letters 
       before you make 7 wrong guesses, you win the game.""")
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-# if guess == 
+
     lives = 7 #states that the number of lives is 7
     letters_guessed = [] # calls function and makes it an empty list
-    guessed_word = get_guessed_word(secret_word, letters_guessed) #guessed_word assigns a string, making the local variable available in this function, get_guessed_word creates the string made up of the two arguments
-    print (guessed_word) #TODO: show the guessed word so far
-    guess = input("Guess ONE letter: ")
-    if len(guess) > 1: # checks if guess is more than one character
-        print ("Error: I said ONE letter you numpty!")
-    if not guess.isalpha(): #checks if guess is an alphabetic letter
-        print ("Major Error! Check that you know what a letter it before proceeding.")
-    #TODO: Check if the guessed letter is in the secret_word or not and give the player feedback
-    if is_guess_in_word(guess, secret_word):
-        print (f"Correct. You have {lives} lives left. Guess another letter. ")
-    else:
-        lives -= 1 #update lives variable 
-        print (f"You have {lives} lives left before you are blasted into space.") #tells user how close they are to losing
-    #TODO: check if the game has been won or lost
+    guessed_word = "" #initialise guessed_word string
+    while lives > 0 and not is_word_guessed(secret_word, letters_guessed):
+        guessed_word = get_guessed_word(secret_word, letters_guessed) #guessed_word assigns a string, making the local variable available in this function, get_guessed_word creates the string made up of the two arguments
+        print (guessed_word) #TODO: show the guessed word so far
+        guess = input("Guess ONE letter: ")
+        if len(guess) > 1: # checks if guess is more than one character
+            print ("Error: I said ONE letter you numpty!")
+        if not guess.isalpha(): #checks if guess is an alphabetic letter
+            print ("Major Error! Check that you know what a letter it before proceeding.")
+        #TODO: Check if the guessed letter is in the secret_word or not and give the player feedback
+        if is_guess_in_word(guess, secret_word):
+            letters_guessed.append(guess)
+            print (f"Correct. You have {lives} lives left. Guess another letter. ")
+        else:
+            lives -= 1 #update lives variable 
+            print (f"You have {lives} lives left before you are blasted into space.") #tells user how close they are to losing
+        #TODO: check if the game has been won or lost
     if lives < 1:
-        print ("You have lost the game. Would you like to try again? Y/N")
-    elif (guessed_word == secret_word):
-        print ("You have won the game. Would you like to play again? Y/N")
+        mixer.init()
+        mixer.music.load('Babylon Zoo - Spaceman (Radio Edit) (Radio Edit).mp3')
+        mixer.music.play()#plays "Spaceman" by Babylon Zoo
+        return input ("You have lost the game. Your spaceman has been cut loose as a liability to the mission. We only accept spacemen who can spell. Would you like to try again? Y/N")
+    elif is_word_guessed(secret_word, letters_guessed):
+        return input ("You have won the game. Would you like to play again? Y/N")
 
 
 #this function starts the game
@@ -118,7 +125,6 @@ def test():
 
 
 #These function calls that will start the game
-secret_word = load_word()
-spaceman(secret_word)
-
+while spaceman(load_word()).lower()[0] == "y": #David used this line of code to teach me how to combine these two lines and make the program loop
+    pass
 #  print "_"
