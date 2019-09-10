@@ -1,4 +1,4 @@
- # Welome to the game of Spaceman. It's like Hangman, but in space, and nobody gets hanged.
+ # Welcome to the game of Spaceman. It's like Hangman, but in space, and nobody gets hanged.
     # there is a life support cable as part of the diagram of the Spaceman, butyou can't see it. When you lose the game, the life support cabel is cut, and your Spaceman is blasted into space.
     #you start with seven lives
     #the program selects a secret word from a list
