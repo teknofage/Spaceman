@@ -85,9 +85,13 @@ def spaceman(secret_word):
     player_name = input("What's your name? ")
     print('')
     print(f"""Hello, {player_name}. You are going to play the game Spaceman. 
-      The program will pick a word at random from a list, and ask you to guess letters in the word. 
-      After 7 wrong guesses, you lose the game. If you guess all of the letters 
-      before you make 7 wrong guesses, you win the game.""")
+            Your Spaceman is repelling Space Pirates, and is attached to the ship by 
+            a life support cable. If the life support cable were to be severed by one 
+            of the laser cannons they are dodging, they would be blasted off into space.
+            
+            The program will pick a word at random from a list, and ask you to guess letters in the word. 
+            After 7 wrong guesses, you lose all 7 lives, and you lose the game. If you guess all of the letters 
+            before you make 7 wrong guesses, you win the game. It is recommended that you choose to experience both outcomes.""")
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
 
     lives = 7 #states that the number of lives is 7
@@ -98,24 +102,34 @@ def spaceman(secret_word):
         print (guessed_word) #TODO: show the guessed word so far
         guess = input("Guess ONE letter: ")
         if len(guess) > 1: # checks if guess is more than one character
-            print ("Error: I said ONE letter you numpty!")
+            lives == lives
+            print (f"Error: I said ONE letter you numpty! You have {lives} lives left before you are blasted into space. ")
         if not guess.isalpha(): #checks if guess is an alphabetic letter
-            print ("Major Error! Check that you know what a letter it before proceeding.")
+            lives == lives
+            print (f"Major Error! Check that you know what a letter is before proceeding. You have {lives} lives left before you are blasted into space. ")
         #TODO: Check if the guessed letter is in the secret_word or not and give the player feedback
         if is_guess_in_word(guess, secret_word):
             letters_guessed.append(guess)
-            print (f"Correct. You have {lives} lives left. Guess another letter. ")
+            print (f"Correct. You have {lives} lives left. Guess another letter. Letters already guessed: {letters_guessed}")
+        elif not guess.isalpha() or len(guess) > 1:
+            lives = lives #update lives variable 
         else:
+            letters_guessed.append(guess)
             lives -= 1 #update lives variable 
-            print (f"You have {lives} lives left before you are blasted into space.") #tells user how close they are to losing
+            print (f"A hit! You have {lives} lives left before you are blasted into space. Letters already guessed: {letters_guessed}") #tells user how close they are to losing
         #TODO: check if the game has been won or lost
     if lives < 1:
         mixer.init()
         mixer.music.load('Babylon Zoo - Spaceman (Radio Edit) (Radio Edit).mp3')
         mixer.music.play()#plays "Spaceman" by Babylon Zoo
-        return input ("You have lost the game. Your spaceman has been cut loose as a liability to the mission. We only accept spacemen who can spell. Would you like to try again? Y/N")
+        return input (f"""You have lost the game. As a consequence of you failing to guess {secret_word}, 
+                      your spaceman has been blasted loose and is spiralling off into space. 
+                      But we only need spacemen who can spell, because, once we escape the Space Pirates, 
+                      this mission is to go to the Intergalactic Spelling Bee Championships on Mars. 
+                      
+                      Would you like to try again? Y/N""")
     elif is_word_guessed(secret_word, letters_guessed):
-        return input ("You have won the game. Would you like to play again? Y/N")
+        return input (f"You have correctly guessed {secret_word}, and won the game. Would you like to play again? Y/N: ")
 
 
 #this function starts the game
