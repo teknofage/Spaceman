@@ -91,7 +91,8 @@ def spaceman(secret_word):
             
             The program will pick a word at random from a list, and ask you to guess letters in the word. 
             After 7 wrong guesses, you lose all 7 lives, and you lose the game. If you guess all of the letters 
-            before you make 7 wrong guesses, you win the game. It is recommended that you choose to experience both outcomes.""")
+            before you make 7 wrong guesses, you win the game. It is recommended that you choose to experience 
+            both outcomes.""")
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
 
     lives = 7 #states that the number of lives is 7
@@ -111,7 +112,7 @@ def spaceman(secret_word):
         if is_guess_in_word(guess, secret_word):
             letters_guessed.append(guess)
             print (f"Correct. You have {lives} lives left. Guess another letter. Letters already guessed: {letters_guessed}")
-        elif not guess.isalpha() or len(guess) > 1:
+        elif not guess.isalpha() or len(guess) > 1 or guess in letters_guessed: #checks whether guess is not alphabetic, is longer than one character, or if it has been guessed already
             lives = lives #update lives variable 
         else:
             letters_guessed.append(guess)
