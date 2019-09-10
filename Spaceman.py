@@ -120,7 +120,7 @@ def spaceman(secret_word):
         #TODO: check if the game has been won or lost
     if lives < 1:
         mixer.init()
-        mixer.music.load('Babylon Zoo - Spaceman (Radio Edit) (Radio Edit).mp3')
+        mixer.music.load('Babylon Zoo - Spaceman (Radio Edit).mp3')
         mixer.music.play()#plays "Spaceman" by Babylon Zoo
         return input (f"""You have lost the game. As a consequence of you failing to guess {secret_word}, 
                       your spaceman has been blasted loose and is spiralling off into space. 
@@ -129,7 +129,10 @@ def spaceman(secret_word):
                       
                       Would you like to try again? Y/N""")
     elif is_word_guessed(secret_word, letters_guessed):
-        return input (f"You have correctly guessed {secret_word}, and won the game. Would you like to play again? Y/N: ")
+        return input (f"""You have correctly guessed {secret_word}, and won the game. 
+                      Your Spaceman has survived... this time.
+                      
+                      Would you like to play again? Y/N: """)
 
 
 #this function starts the game
