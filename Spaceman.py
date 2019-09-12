@@ -91,7 +91,7 @@ def spaceman(secret_word):
             
             The program will pick a word at random from a list, and ask you to guess letters in the word. 
             After 7 wrong guesses, you lose all 7 lives, and you lose the game. If you guess all of the letters 
-            before you make 7 wrong guesses, you win the game. It is recommended that you choose to experience 
+            before you make 7 wrong guesses, you win the game. It is recommended that you choose to enjoy 
             both outcomes.""")
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
 
@@ -117,23 +117,23 @@ def spaceman(secret_word):
         else:
             letters_guessed.append(guess)
             lives -= 1 #update lives variable 
-            print (f"A hit! You have {lives} lives left before you are blasted into space. Letters already guessed: {letters_guessed}") #tells user how close they are to losing
+            print (f"You've been hit! You have {lives} lives left before you are blasted into space. Letters already guessed: {letters_guessed}") #tells user how close they are to losing
         #TODO: check if the game has been won or lost
     if lives < 1:
         mixer.init()
         mixer.music.load('Babylon Zoo - Spaceman (Radio Edit).mp3')
         mixer.music.play()#plays "Spaceman" by Babylon Zoo
-        return input (f"""You have lost the game. As a consequence of you failing to guess {secret_word}, 
-                      your spaceman has been blasted loose and is spiralling off into space. 
+        return input (f"""You have lost the game. As a consequence of you failing to guess >{secret_word}<, 
+        your spaceman has been blasted loose and is spiralling off into space. 
                       But we only need spacemen who can spell, because, once we escape the Space Pirates, 
                       this mission is to go to the Intergalactic Spelling Bee Championships on Mars. 
                       
                       Would you like to try again? Y/N""")
     elif is_word_guessed(secret_word, letters_guessed):
-        return input (f"""You have correctly guessed {secret_word}, and won the game. 
-                      Your Spaceman has survived... this time.
+        return input (f"""Congratulations! You have correctly guessed >{secret_word}<, and won the game. 
+                Your Spaceman has survived... this time.
                       
-                      Would you like to play again? Y/N: """)
+                                Would you like to play again? Y/N: """)
 
 
 #this function starts the game
