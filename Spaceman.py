@@ -137,40 +137,32 @@ def spaceman(secret_word):
 
 
 #this function starts the game
-def test():
-    print(secret_word)
-    print(is_guess_in_word("x", "random")) #sets secret_word = "random", and "x" = letter guess
-
+# def test():
+#     #print(secret_word)
+#     print(is_guess_in_word("x", "random")) #sets secret_word = "random", and "x" = letter guess
 
 #Test Functions
-#These tests work when the spaceman function is commented out, but do not when the spaceman app is allowed to run.
-# Class Spaceman_Tests(unittest.TestCase)
+
+def test_is_word_guessed():
+    assert is_word_guessed(('story'),['s', 't', 'o', 'r', 'y']) is True
+    assert is_word_guessed(('walking'),['w', 'a', 'l', 'k', 'i','n', 'g']) is True
+    assert is_word_guessed(('snorkel'),['s', 'n', 'o', 'r', 'k', 'e', 'l']) is True
 
 
-    def test_is_word_guessed(self):
-        assert is_word_guessed(('story'),['s', 't', 'o', 'r', 'y']) is True
-        assert is_word_guessed(('walking'),['w', 'a', 'l', 'k', 'i','n', 'h']) is False
-        assert is_word_guessed(('snorkel'),['s', 'n', 'o', 'g', 'k', 'e', 'l']) is False
+def test_is_guess_in_word():
+    assert is_guess_in_word(("s"), ("string")) is True
+    assert is_guess_in_word(("w"), ("winking")) is True
+    assert is_guess_in_word(("p"), ("parable")) is True
 
+def test_get_guessed_word():
+    assert get_guessed_word(("balance"), ["b", "a", "l"]) == "bala___"
+    assert get_guessed_word(("wilful"), ["f", "i", "l", "u" ]) == "_ilful"
+    assert get_guessed_word(("crunchy"), ["r", "c", "h"]) == "cr__ch_"
 
-    def test_load_word(self):
-        assert load_word(("string"), ("string")) is False
-        assert load_word(("winking"), ("winking")) is False
-        assert load_word(("parable"), ("parable")) is False
-
-    def test_get_guessed_word(self):
-        assert get_guessed_word(("balance"), ["b", "a", "l"] == "b______")
-        assert get_guessed_word(("wilful"), ["f", "i", "l", "u" ] == "_ilful")
-        assert get_guessed_word(("crunchy"), ["r", "c", "h"] == "cr__ch_")
-
-# run the tests
-if __name__ == '__main__':
-    unittest.main()
 
 #These function calls that will start the game
-# while spaceman(load_word()).lower()[0] == "y": #David used this line of code to teach me how to combine these two lines and make the program loop
-    pass
-#  print "_"
-
-
+if __name__ == '__main__':
+    while spaceman(load_word()).lower()[0] == "y": #David used this line of code to teach me how to combine these two lines and make the program loop
+        pass
+    #  print "_"
 
